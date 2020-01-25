@@ -1,4 +1,4 @@
-import {ingredientsParser, recipeParser} from './index';
+import {ingredientsParser, recipeParser} from "./index";
 
 const ingredientsValue = `nombre: pescado
 cantidad: 2 gramos
@@ -35,7 +35,7 @@ Preparacion:
 
 
 
-it('parse a correct text for ingredients', () => {
+it("parse a correct text for ingredients", () => {
 
     const expected = {
         pescado: {
@@ -43,50 +43,50 @@ it('parse a correct text for ingredients', () => {
             proteinas: 10.3,
             grasas: 10,
             carbohidratos: 20,
-            cantidad: {cantidad: 2, unidad: 'gramos'}
+            cantidad: {cantidad: 2, unidad: "gramos"},
         },
         rabioso: {
             calorias: 10,
             proteinas: 10.3,
             grasas: 10,
             carbohidratos: 20,
-            cantidad: {cantidad: 200, unidad: 'metros'}
-        }
+            cantidad: {cantidad: 200, unidad: "metros"},
+        },
     };
 
     const response = ingredientsParser.parse(ingredientsValue);
     expect(response).toStrictEqual(expected);
 });
 
-it('parse a correct text for a recipe', () => {
+it("parse a correct text for a recipe", () => {
     const expected = {
-        "nombre": "Merengue.",
-        "porciones": 3,
-        "ingredientes": [
+        nombre: "Merengue.",
+        porciones: 3,
+        ingredientes: [
             {
-                "elemento": "Huevos",
-                "cantidad": {
-                    "valor": 2,
-                    "unidad": "unidades"
-                }
+                elemento: "Huevos",
+                cantidad: {
+                    valor: 2,
+                    unidad: "unidades",
+                },
             },
             {
-                "elemento": "Almibar",
-                "cantidad": null
+                elemento: "Almibar",
+                cantidad: null,
             },
             {
-                "elemento": "Pequeña sandia",
-                "cantidad": null
-            }
+                elemento: "Pequeña sandia",
+                cantidad: null,
+            },
         ],
-        "preparacion": [
+        preparacion: [
             "Romper los huevos",
             "Separar la clara",
             "Batir la clara a punto de nieve",
             "Mezclarla con el almibar.",
             "Hornear la mezcla 20 minutos.",
-            "Colocarle una pequeña sandia, de 2 o 3 Kg."
-        ]
+            "Colocarle una pequeña sandia, de 2 o 3 Kg.",
+        ],
     };
     const response = recipeParser.parse(recipeValue);
     expect(response).toStrictEqual(expected);

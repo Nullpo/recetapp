@@ -1,5 +1,5 @@
 import {Request, RequestHandler, Response} from "express";
-import {ErrorCode} from "./types/models";
+import {ErrorCode} from "./types/errors";
 
 export type ControllerFunction<T> = (req: Request) => Promise<T> | T;
 

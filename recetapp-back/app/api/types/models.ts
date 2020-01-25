@@ -1,10 +1,20 @@
-export type ingredient = {
-  pepe: string;
-  caca: number;
-  lalo: boolean;
+type IngredientAmmount = {
+  cantidad: number;
+  unidad: string
 };
 
-export enum ErrorCode {
-  NOT_FOUND = "NOT_FOUND",
-  BAD_FORMAT = "BAD_FORMAT",
-}
+export type Ingredient = {
+  pescado: string;
+  calorias: number;
+  proteinas: number;
+  grasas: number;
+  carbohidratos: number;
+  cantidad: IngredientAmmount;
+};
+
+export type Recipe = {
+  nombre: string;
+  porciones: number;
+  ingredientes: Ingredient[];
+  preparacion: string[];
+};
