@@ -1,0 +1,57 @@
+texto =
+   a: ingredientes
+   eol*
+   {
+     return a
+   }
+
+
+ingredientes =
+  a:ingrediente b:ingredientesRecursivo? { return {...a, ...b} }
+
+ingredientesRecursivo
+  = eol+ a:ingredientes { return a }
+
+ingrediente
+  = n:name eol
+    q:quantity eol
+    s:chars* {
+      return {[n]:
+           s.reduce(
+        	(prev, act) => {
+      			return {
+                    ...prev,
+      				[act.key]: act.value
+      			}
+      		}, {calorias: 0, proteinas:0, grasas: 0, carbohidratos: 0, cantidad: q}
+        )
+      }
+    }
+
+    quantity = "cantidad:" " "* n:number u:untilEol? { return {cantidad: n, unidad:u} }
+
+
+
+name =
+	(" " "\n")* "nombre:" " "* name:untilEol { return name; }
+
+chars = s:(char) eol { return s; }
+
+char =
+    name:([^\n:])+ ":" " "* x:number {
+    return {
+    	key: name.join('').trim(),
+        value: x
+    };
+}
+
+eol= "\n"
+
+untilEol = r:[^\n]+ {
+   return r.join('').trim();
+}
+
+number
+ = r:(integer) x:( "." integer )? { return parseFloat(r + (x? "." + x[1]: "")); }
+
+integer = s:[0-9]+ { return s.join('').trim() }
