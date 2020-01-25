@@ -1,0 +1,1 @@
+export const listInitialState = listType => ({[listType]: [], fields: []});
