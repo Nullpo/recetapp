@@ -1,0 +1,61 @@
+receta
+ = eol* n:nombre inf:porciones i:ingredientes p:preparacion {
+   return {
+      nombre: n,
+      porciones: inf,
+      ingredientes: i,
+      preparacion: p
+   }
+}
+
+/**** INFO ****/
+
+info = r:(porciones) {
+      return r
+   }
+
+   porciones = "Porciones:"i " "* r:number " "* eol+ { return r; }
+
+
+/**************/
+
+nombre = n:untilEol eol {
+   return n;
+}
+
+ingredientes
+ = "Ingredientes"i ":"? "\s"* eol+ i:ingrediente+ {
+   return i;
+}
+
+ingrediente
+ = " "* "-" "\s"* i:[^\n-]+ cant:cantidad? eol+ {
+   return {
+      elemento: i.join('').trim(),
+      cantidad: cant
+   }
+}
+
+cantidad
+ = "--" " "* valor:(number) " "+ unidad:([^\n]+) {
+  return { valor, unidad: unidad.join('').trim() }
+}
+
+number
+ = r:([0-9]( "." [0-9] )?)+ { return parseFloat(r.join('').trim()); }
+
+preparacion
+ = "Preparacion"i ":"? eol+ prep:(paso)+ {
+   return prep;
+}
+
+paso
+ = " "* "-" s:untilEol eol* {
+   return s;
+}
+
+eol= "\n"
+
+untilEol = r:[^\n]+ {
+   return r.join('').trim();
+}
