@@ -1,38 +1,47 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import List from "./Lists/List";
+import {getRecipes, getIngredients} from "./services";
+import {listInitialState} from "./Lists/listInitState";
+import {INGREDIENTS, RECIPES} from "./constants";
 
-const ingredients = [{id: 'pepe', uno: 1, dos:2, tres:3, cuatro:4}];
-const ingredientFields = ['uno', 'dos', 'tres'];
+const App = () => {
+  const [fullRecipes, setFullRecipes] = useState(listInitialState(RECIPES));
+  const [fullIngredients, setFullIngredients] = useState(listInitialState(INGREDIENTS));
 
-const recipes = [{id:1, pepe: 'pepe', lalo: 'lalo'}];
-const recipeFields = ['pepe', 'lalo'];
+  useEffect(() => {
+    getRecipes(setFullRecipes);
+  }, []);
 
-function App() {
+  useEffect(() => {
+    getIngredients(setFullIngredients)
+  }, []);
+
+
   return (
     <Container>
       <Row>
         <Col>
           <h2>HOY</h2>
-          comidas de hoy
+          <p>comidas de hoy</p>
         </Col>
       </Row>
       <Row>
         <h2>Histórico</h2>
-        grafico de comidas pasadas
+        <p>grafico de comidas pasadas</p>
       </Row>
       <Row>
         <Col>
           <h2>Recetas</h2>
-          <List ingredients={recipes} fields={recipeFields} />
+          <List items={fullRecipes.recipes} fields={fullRecipes.fields} loaded={fullRecipes.loaded} />
         </Col>
         <Col>
           <h2>Ingredients</h2>
-          <List ingredients={ingredients} fields={ingredientFields} />
+          <List items={fullIngredients.ingredients} fields={fullIngredients.fields} loaded={fullIngredients.loaded} />
         </Col>
       </Row>
     </Container>
   );
-}
+};
 
 export default App;
