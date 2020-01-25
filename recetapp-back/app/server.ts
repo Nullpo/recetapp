@@ -13,6 +13,7 @@ export const init = (port, db): http.Server => {
   app.use("/api", routes(db));
 
   return app.listen(port, () => {
+    // tslint:disable-next-line:no-console
     console.log(`Server listening at port ${port}`);
   });
 };

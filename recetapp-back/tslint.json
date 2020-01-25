@@ -3,6 +3,8 @@
 
   "rules": {
     "curly": false,
+    "no-unused-variable": false,
+    "no-unused-expression": false,
     "max-line-length": {
       "options": [120]
     },

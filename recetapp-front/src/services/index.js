@@ -12,5 +12,8 @@ export const getIngredients = async (callback) =>
 
 export const createNewItem = (data, callback) => {
   return axios.post(`${config.apiUrl}/${data.type}`, data.item)
-    .then(result => callback(result.data))
+    .then(result => {
+      console.log(result.data)
+      return callback(result.data);
+    })
 };
