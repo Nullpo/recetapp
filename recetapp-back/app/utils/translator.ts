@@ -1,8 +1,6 @@
-// @ts-ignore
 import {NoTranslationAvailableError} from "./errors";
 
-// @ts-ignore
-const ingredientTranslations = {
+export const ingredientTranslations = {
   carbohidratos: "carbs",
   calorias: "calories",
   proteinas: "proteins",

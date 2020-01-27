@@ -6,6 +6,7 @@ import {
   findIngredients
 } from "./ingredient.repository";
 import {ingredientsParser} from "../../parsers";
+import {ingredientTranslations, translateObjectKeys} from "../../utils/translator";
 
 export const createIngredientsService = (db, rawItem) => {
   const parsedIngredients = ingredientsParser.parse(rawItem);
@@ -13,7 +14,7 @@ export const createIngredientsService = (db, rawItem) => {
     return [...list, {name, ...parsedIngredients[name]}];
   }, []);
 
-  const ingredients = parsedIngredientsList;
+  const ingredients = translateObjectKeys(parsedIngredientsList, ingredientTranslations);
 
   return createIngredients(db, ingredients)
     .then(() => ({...ingredients}));
