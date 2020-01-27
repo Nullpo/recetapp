@@ -5,6 +5,7 @@
     "curly": false,
     "no-unused-variable": false,
     "no-unused-expression": false,
+    "arrow-parens": false,
     "max-line-length": {
       "options": [120]
     },

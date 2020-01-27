@@ -1,15 +1,21 @@
-export const createIngredient = (db, ingredient) => {
-    return db.collection("ingredients").insertOne(ingredient);
+import {INGREDIENTS} from "../../utils/constants";
+
+export const createIngredients = (db, ingredients) => {
+    return db.collection(INGREDIENTS).insertMany(ingredients);
 };
 
 export const findIngredients = (db, filter) => {
-    return db.collection("ingredients").find({filter}).toArray();
+    return db.collection(INGREDIENTS).find({filter}).toArray();
 };
 
 export const findIngredient = (db, ingredientId) => {
-    return db.collection("ingredients").findOne({_id: ingredientId});
+    return db.collection(INGREDIENTS).findOne({_id: ingredientId});
 };
 
-export const findAllIngredients = (db) => {
-    return db.collection("ingredients").find({}).toArray();
+export const findAllIngredients = db => {
+    return db.collection(INGREDIENTS).find({}).toArray();
+};
+
+export const findIngredientFields = db => {
+  return db.collection("lists-fields").find({list: INGREDIENTS});
 };
